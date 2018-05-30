@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ETModel
 {
 	public class EventProxy: IEvent
-	{
+    {
 		public Action<List<object>> action;
 		public List<object> param = new List<object>();
 

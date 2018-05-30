@@ -22,7 +22,7 @@ namespace ETModel
 				DontDestroyOnLoad(gameObject);
 				Game.EventSystem.Add(DLLType.Model, typeof(Init).Assembly);
 
-				Game.Scene.GetSingletonComponent<GlobalConfigComponent>();
+				Game.Scene.GetComponent<GlobalConfigComponent>();
 				Game.Scene.AddComponent<NetOuterComponent>();
 				Game.Scene.AddComponent<ResourcesComponent>();
 				Game.Scene.AddComponent<BehaviorTreeComponent>();

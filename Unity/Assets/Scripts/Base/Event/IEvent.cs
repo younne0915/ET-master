@@ -11,7 +11,7 @@ namespace ETModel
 	}
 
 	public abstract class AEvent : IEvent
-	{
+    {
 		public void Handle()
 		{
 			this.Run();
@@ -36,7 +36,7 @@ namespace ETModel
 	}
 
 	public abstract class AEvent<A>: IEvent
-	{
+    {
 		public void Handle()
 		{
 			throw new NotImplementedException();
@@ -61,7 +61,7 @@ namespace ETModel
 	}
 
 	public abstract class AEvent<A, B>: IEvent
-	{
+    {
 		public void Handle()
 		{
 			throw new NotImplementedException();
@@ -86,7 +86,7 @@ namespace ETModel
 	}
 
 	public abstract class AEvent<A, B, C>: IEvent
-	{
+    {
 		public void Handle()
 		{
 			throw new NotImplementedException();

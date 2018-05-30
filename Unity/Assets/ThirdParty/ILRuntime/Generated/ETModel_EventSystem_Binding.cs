@@ -21,7 +21,7 @@ namespace ILRuntime.Runtime.Generated
             MethodBase method;
             Type[] args;
             Type type = typeof(ETModel.EventSystem);
-            args = new Type[]{typeof(System.String), typeof(ETModel.IEvent)};
+            args = new Type[]{typeof(System.String), typeof(ETModel.AEvent)};
             method = type.GetMethod("RegisterEvent", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, RegisterEvent_0);
 

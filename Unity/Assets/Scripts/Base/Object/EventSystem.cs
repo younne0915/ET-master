@@ -120,7 +120,7 @@ namespace ETModel
 				{
 					EventAttribute aEventAttribute = (EventAttribute)attr;
 					object obj = Activator.CreateInstance(type);
-					IEvent iEvent = obj as IEvent;
+                    IEvent iEvent = obj as IEvent;
 					if (iEvent == null)
 					{
 						Log.Error($"{obj.GetType().Name} 没有继承IEvent");
