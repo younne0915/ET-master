@@ -1,7 +1,11 @@
-﻿namespace ETModel
+﻿using System;
+using System.Collections.Generic;
+
+namespace ETModel
 {
 	public static class Game
 	{
+        private static Dictionary<Type, Component> _singletonDic = new Dictionary<Type, Component>();
 		private static Scene scene;
 
 		public static Scene Scene
@@ -47,6 +51,18 @@
 				return hotfix ?? (hotfix = new Hotfix());
 			}
 		}
+
+        public static T GetSingletonComponent<T>() where T : Component
+        {
+            Type t = typeof(T);
+            if (!_singletonDic.ContainsKey(t))
+            {
+                T component = ObjectPool.Fetch<T>();
+                EventSystem.Awake(component);
+                _singletonDic.Add(t, component);
+            }
+            return (T)_singletonDic[t];
+        }
 
 		public static void Close()
 		{

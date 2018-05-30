@@ -405,7 +405,7 @@ namespace ETModel
 					try
 					{
 						iStartSystem.Run(component);
-					}
+                    }
 					catch (Exception e)
 					{
 						Log.Error(e);

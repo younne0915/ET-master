@@ -22,5 +22,14 @@
 		public const string LoadingFinish = "LoadingFinish";
 		public const string TestHotfixSubscribMonoEvent = "TestHotfixSubscribMonoEvent";
 		public const string MaxModelEvent = "MaxModelEvent";
-	}
+
+        public const string TouchStart = "TouchStart";
+        public const string TouchMoving = "TouchMoving";
+        public const string TouchOffset = "TouchOffset";
+        public const string TouchEnd = "TouchEnd";
+        public const string TouchStationary = "TouchStationary";
+        public const string TouchCancled = "TouchCancled";
+
+
+    }
 }

@@ -107,7 +107,7 @@ public class T4MExtendsSC : Editor {
 					Handles.DrawWireDisc(raycastHit.point, raycastHit.normal, T4MSC.T4MPreview.orthographicSize*0.9f);
 				}
 				
-				if ((e.type ==  EventType.mouseDrag && e.alt == false && e.shift == false && e.button == 0) || (e.shift == false && e.alt == false && e.button == 0 && ToggleF == false)){	
+				if ((e.type ==  EventType.MouseDrag && e.alt == false && e.shift == false && e.button == 0) || (e.shift == false && e.alt == false && e.button == 0 && ToggleF == false)){	
 					Vector2 pixelUV = raycastHit.textureCoord*T4MSC.T4MMaskTexUVCoord;//0.14f;
 					int PuX = Mathf.FloorToInt (pixelUV.x * T4MSC.T4MMaskTex.width);
 					int PuY = Mathf.FloorToInt (pixelUV.y * T4MSC.T4MMaskTex.height);
@@ -149,7 +149,7 @@ public class T4MExtendsSC : Editor {
 					
 					ToggleF = true;	
 					
-				}else if (e.type ==  EventType.mouseUp && e.alt == false && e.button == 0 && ToggleF == true){
+				}else if (e.type ==  EventType.MouseUp && e.alt == false && e.button == 0 && ToggleF == true){
 					T4MSC.SaveTexture();
 					ToggleF = false;
 				}
@@ -329,7 +329,7 @@ public class T4MExtendsSC : Editor {
 									}
 								}
 					}
-						if (e.type ==  EventType.mouseDown && e.alt == false && e.button == 0 && e.shift == false && e.control == false && PlantObjPreview|| e.type ==  EventType.mouseDrag && e.alt == false && e.button == 0 && e.shift == false && e.control == false && PlantObjPreview){
+						if (e.type ==  EventType.MouseDown && e.alt == false && e.button == 0 && e.shift == false && e.control == false && PlantObjPreview|| e.type ==  EventType.MouseDrag && e.alt == false && e.button == 0 && e.shift == false && e.control == false && PlantObjPreview){
 							if (CurrentObject){
 								
 								if (CheckPlacement == 0)
@@ -387,7 +387,7 @@ public class T4MExtendsSC : Editor {
 										
 								}
 							}
-						}else if(e.type ==  EventType.mouseDown && e.alt == false && e.button == 0 && e.shift == true && e.control == false && PlantObjPreview || e.type ==  EventType.mouseDrag && e.alt == false && e.button == 0 && e.shift == true && e.control == false && PlantObjPreview){ 
+						}else if(e.type ==  EventType.MouseDown && e.alt == false && e.button == 0 && e.shift == true && e.control == false && PlantObjPreview || e.type ==  EventType.MouseDrag && e.alt == false && e.button == 0 && e.shift == true && e.control == false && PlantObjPreview){ 
 							if (ToggleF == false){
 								T4MPlantObjGet =  GameObject.FindObjectsOfType(typeof(T4MPlantObjSC)) as T4MPlantObjSC[];
 								ToggleF =true;
@@ -407,7 +407,7 @@ public class T4MExtendsSC : Editor {
 									ToggleF = false;
 								}
 							}
-						}else if(e.type ==  EventType.mouseDown && e.alt == false && e.button == 0 && e.shift == false && e.control == true && PlantObjPreview || e.type ==  EventType.mouseDrag && e.alt == false && e.button == 0 && e.shift == false && e.control == true && PlantObjPreview){ 
+						}else if(e.type ==  EventType.MouseDown && e.alt == false && e.button == 0 && e.shift == false && e.control == true && PlantObjPreview || e.type ==  EventType.MouseDrag && e.alt == false && e.button == 0 && e.shift == false && e.control == true && PlantObjPreview){ 
 								
 								if (ToggleF == false){
 									T4MPlantObjGet =  GameObject.FindObjectsOfType(typeof(T4MPlantObjSC)) as T4MPlantObjSC[];
@@ -464,7 +464,7 @@ public class T4MExtendsSC : Editor {
 									PlantObj.transform.parent = Group.transform;
 								}
 							}
-						}else if (e.type ==  EventType.mouseUp && ToggleF == true){
+						}else if (e.type ==  EventType.MouseUp && ToggleF == true){
 							ToggleF =false;
 						}
 			}

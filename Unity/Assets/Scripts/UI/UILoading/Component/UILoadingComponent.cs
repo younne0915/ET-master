@@ -8,7 +8,8 @@ namespace ETModel
 	{
 		public override void Awake(UILoadingComponent self)
 		{
-			self.text = self.GetParent<UI>().GameObject.Get<GameObject>("Text").GetComponent<Text>();
+            Log.Debug("UiLoadingComponentStartSystem : Awake");
+            self.text = self.GetParent<UI>().GameObject.Get<GameObject>("Text").GetComponent<Text>();
 		}
 	}
 
@@ -17,7 +18,8 @@ namespace ETModel
 	{
 		public override async void Start(UILoadingComponent self)
 		{
-			TimerComponent timerComponent = Game.Scene.GetComponent<TimerComponent>();
+            Log.Debug("UiLoadingComponentStartSystem : Start");
+            TimerComponent timerComponent = Game.Scene.GetComponent<TimerComponent>();
 			long instanceId = self.InstanceId;
 			while (true)
 			{
