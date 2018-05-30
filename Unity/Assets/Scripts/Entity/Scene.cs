@@ -1,4 +1,7 @@
-﻿namespace ETModel
+﻿using System;
+using System.Collections.Generic;
+
+namespace ETModel
 {
 	public enum SceneType
 	{
@@ -21,7 +24,22 @@
 
 		public string Name { get; set; }
 
-		public Scene()
+        private static Dictionary<Type, Component> _singletonDic = new Dictionary<Type, Component>();
+
+
+        public T GetSingletonComponent<T>() where T : Component
+        {
+            Type t = typeof(T);
+            if (!_singletonDic.ContainsKey(t))
+            {
+                T component = Game.ObjectPool.Fetch<T>();
+                Game.EventSystem.Awake(component);
+                _singletonDic.Add(t, component);
+            }
+            return (T)_singletonDic[t];
+        }
+
+        public Scene()
 		{
 		}
 
@@ -35,8 +53,12 @@
 			{
 				return;
 			}
-
-			base.Dispose();
+            foreach (Component component in _singletonDic.Values)
+            {
+                component.Dispose();
+            }
+            _singletonDic.Clear();
+            base.Dispose();
 		}
 	}
 }
