@@ -20,28 +20,29 @@ namespace ETModel
 		private bool isConnected;
 		private TaskCompletionSource<Packet> recvTcs;
 
-		/// <summary>
-		/// connect
-		/// </summary>
-		public TChannel(TcpClient tcpClient, IPEndPoint ipEndPoint, TService service) : base(service, ChannelType.Connect)
-		{
-			this.tcpClient = tcpClient;
-			this.parser = new PacketParser(this.recvBuffer);
-			this.RemoteAddress = ipEndPoint;
+        /// <summary>
+        /// connect
+        /// </summary>
+        public TChannel(TcpClient tcpClient, IPEndPoint ipEndPoint, TService service) : base(service, ChannelType.Connect)
+        {
+            this.tcpClient = tcpClient;
+            this.parser = new PacketParser(this.recvBuffer);
+            this.RemoteAddress = ipEndPoint;
 
-			this.ConnectAsync(ipEndPoint);
-		}
+            this.ConnectAsync(ipEndPoint);
+        }
 
-		/// <summary>
-		/// accept
-		/// </summary>
-		public TChannel(TcpClient tcpClient, TService service) : base(service, ChannelType.Accept)
+        /// <summary>
+        /// accept
+        /// </summary>
+        public TChannel(TcpClient tcpClient, TService service) : base(service, ChannelType.Accept)
 		{
 			this.tcpClient = tcpClient;
 			this.parser = new PacketParser(this.recvBuffer);
 
 			IPEndPoint ipEndPoint = (IPEndPoint)this.tcpClient.Client.RemoteEndPoint;
 			this.RemoteAddress = ipEndPoint;
+            Log.Debug("accept IP : " + ipEndPoint.Address);
 			this.OnAccepted();
 		}
 
