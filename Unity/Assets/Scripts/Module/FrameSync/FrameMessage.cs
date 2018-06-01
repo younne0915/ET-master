@@ -6,7 +6,7 @@ namespace ETModel
 
     [Message(Opcode.OneFrameMessage)]
     [ProtoContract]
-    public partial class OneFrameMessage: IActorMessage
+    public partial class OneFrameMessage: IActorNotify
     {
         [ProtoMember(90, IsRequired = true)]
         public int RpcId { get; set; }
@@ -24,7 +24,7 @@ namespace ETModel
 
     [Message(Opcode.FrameMessage)]
     [ProtoContract]
-    public partial class FrameMessage: IActorMessage
+    public partial class FrameMessage: IActorNotify
     {
         [ProtoMember(90, IsRequired = true)]
         public int RpcId { get; set; }

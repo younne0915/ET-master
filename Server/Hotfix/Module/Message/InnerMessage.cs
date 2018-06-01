@@ -513,7 +513,7 @@ namespace ETHotfix
 
 	[Message(InnerOpcode.G2M_SessionDisconnect)]
 	[ProtoContract]
-	public partial class G2M_SessionDisconnect: IActorMessage
+	public partial class G2M_SessionDisconnect: IActorNotify
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }

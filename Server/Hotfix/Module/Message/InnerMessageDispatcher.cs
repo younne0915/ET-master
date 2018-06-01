@@ -12,16 +12,16 @@ namespace ETHotfix
 			IMessage message = (IMessage)session.Network.MessagePacker.DeserializeFrom(messageType, packet.Bytes, Packet.Index, packet.Length - Packet.Index);
 			
 			// 收到actor消息,放入actor队列
-			if (message is IActorMessage iActorMessage)
+			if (message is IActorLanuch iActorLaunch)
 			{
-				Entity entity = (Entity)Game.EventSystem.Get(iActorMessage.ActorId);
+				Entity entity = (Entity)Game.EventSystem.Get(iActorLaunch.ActorId);
 				if (entity == null)
 				{
-					Log.Warning($"not found actor: {iActorMessage.ActorId}");
+					Log.Warning($"not found actor: {iActorLaunch.ActorId}");
 					ActorResponse response = new ActorResponse
 					{
 						Error = ErrorCode.ERR_NotFoundActor,
-						RpcId = iActorMessage.RpcId
+						RpcId = iActorLaunch.RpcId
 					};
 					session.Reply(response);
 					return;
@@ -33,14 +33,14 @@ namespace ETHotfix
 					ActorResponse response = new ActorResponse
 					{
 						Error = ErrorCode.ERR_ActorNoActorComponent,
-						RpcId = iActorMessage.RpcId
+						RpcId = iActorLaunch.RpcId
 					};
 					session.Reply(response);
 					Log.Error($"actor没有挂载ActorComponent组件: {entity.GetType().Name} {entity.Id}");
 					return;
 				}
 				
-				mailBoxComponent.Add(new ActorMessageInfo() { Session = session, Message = iActorMessage });
+				mailBoxComponent.Add(new ActorMessageInfo() { Session = session, Launch = iActorLaunch });
 				return;
 			}
 			

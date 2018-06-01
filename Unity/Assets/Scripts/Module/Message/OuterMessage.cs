@@ -6,7 +6,7 @@ namespace ETModel
 {
 	[Message(OuterOpcode.Actor_Test)]
 	[ProtoContract]
-	public partial class Actor_Test: IActorMessage
+	public partial class Actor_Test: IActorLanuch
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
@@ -129,7 +129,7 @@ namespace ETModel
 
 	[Message(OuterOpcode.Actor_CreateUnits)]
 	[ProtoContract]
-	public partial class Actor_CreateUnits: IActorMessage
+	public partial class Actor_CreateUnits: IActorLanuch
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }

@@ -4,19 +4,19 @@ namespace ETModel
 {
 	public struct ActorTask
 	{
-		public IActorMessage ActorMessage;
+		public IActorLanuch ActorLaunch;
 		
 		public TaskCompletionSource<IResponse> Tcs;
 
-		public ActorTask(IActorMessage actorMessage)
+		public ActorTask(IActorLanuch actorLaunch)
 		{
-			this.ActorMessage = actorMessage;
+			this.ActorLaunch = actorLaunch;
 			this.Tcs = null;
 		}
 		
-		public ActorTask(IActorMessage actorMessage, TaskCompletionSource<IResponse> tcs)
+		public ActorTask(IActorLanuch actorLaunch, TaskCompletionSource<IResponse> tcs)
 		{
-			this.ActorMessage = actorMessage;
+			this.ActorLaunch = actorLaunch;
 			this.Tcs = tcs;
 		}
 	}

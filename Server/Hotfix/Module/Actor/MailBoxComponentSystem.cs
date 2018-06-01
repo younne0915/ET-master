@@ -98,7 +98,7 @@ namespace ETHotfix
 				{
 					ActorMessageInfo info = await self.GetAsync();
 					// 返回null表示actor已经删除,协程要终止
-					if (info.Message == null)
+					if (info.Launch == null)
 					{
 						return;
 					}

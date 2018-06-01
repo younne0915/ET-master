@@ -7,12 +7,12 @@ namespace ETModel
 	{
 		protected abstract Task Run(E entity, Message message);
 
-		public async Task Handle(Session session, Entity entity, IActorMessage actorRequest)
+		public async Task Handle(Session session, Entity entity, IActorLanuch actorLaunch)
 		{
-			Message msg = actorRequest as Message;
+			Message msg = actorLaunch as Message;
 			if (msg == null)
 			{
-				Log.Error($"消息类型转换错误: {actorRequest.GetType().FullName} to {typeof (Message).Name}");
+				Log.Error($"消息类型转换错误: {actorLaunch.GetType().FullName} to {typeof (Message).Name}");
 				return;
 			}
 			E e = entity as E;
@@ -22,7 +22,7 @@ namespace ETModel
 				return;
 			}
 
-			int rpcId = actorRequest.RpcId;
+			int rpcId = actorLaunch.RpcId;
 			ActorResponse response = new ActorResponse
 			{
 				RpcId = rpcId
@@ -50,14 +50,14 @@ namespace ETModel
 
 		protected abstract Task Run(E unit, Request message, Action<Response> reply);
 
-		public async Task Handle(Session session, Entity entity, IActorMessage actorRequest)
+		public async Task Handle(Session session, Entity entity, IActorLanuch actorLaunch)
 		{
 			try
 			{
-				Request request = actorRequest as Request;
+				Request request = actorLaunch as Request;
 				if (request == null)
 				{
-					Log.Error($"消息类型转换错误: {actorRequest.GetType().FullName} to {typeof (Request).Name}");
+					Log.Error($"消息类型转换错误: {actorLaunch.GetType().FullName} to {typeof (Request).Name}");
 					return;
 				}
 				E e = entity as E;
@@ -85,7 +85,7 @@ namespace ETModel
 			}
 			catch (Exception e)
 			{
-				throw new Exception($"解释消息失败: {actorRequest.GetType().FullName}", e);
+				throw new Exception($"解释消息失败: {actorLaunch.GetType().FullName}", e);
 			}
 		}
 

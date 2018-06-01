@@ -141,8 +141,8 @@ namespace ETHotfix
 		{
 			Session session = Game.Scene.GetComponent<NetInnerComponent>().Get(self.Address);
 
-			task.ActorMessage.ActorId = self.ActorId;
-			IResponse response = await session.Call(task.ActorMessage);
+			task.ActorLaunch.ActorId = self.ActorId;
+			IResponse response = await session.Call(task.ActorLaunch);
 			
 
 			// 发送成功
@@ -187,9 +187,9 @@ namespace ETHotfix
 			}
 		}
 
-		public static void Send(this ActorMessageSender self, IActorMessage message)
+		public static void Send(this ActorMessageSender self, IActorNotify notify)
 		{
-			ActorTask task = new ActorTask(message);
+			ActorTask task = new ActorTask(notify);
 			self.Add(task);
 		}
 
@@ -206,7 +206,7 @@ namespace ETHotfix
 			string s = "";
 			foreach (ActorTask task in tasks)
 			{
-				s += $" {task.ActorMessage.GetType().Name}";
+				s += $" {task.ActorLaunch.GetType().Name}";
 			}
 
 			return s;

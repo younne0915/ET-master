@@ -50,7 +50,7 @@ namespace ETHotfix
 				}
 
 				ActorTypeHandlerAttribute actorTypeHandlerAttribute = (ActorTypeHandlerAttribute) attrs[0];
-				if (!actorTypeHandlerAttribute.Type.Is(appType))
+				if (!actorTypeHandlerAttribute.appType.Is(appType))
 				{
 					continue;
 				}
@@ -63,7 +63,7 @@ namespace ETHotfix
 					throw new Exception($"actor handler not inherit IEntityActorHandler: {obj.GetType().FullName}");
 				}
 
-				self.ActorTypeHandlers.Add(actorTypeHandlerAttribute.ActorType, iActorTypeHandler);
+				self.ActorTypeHandlers.Add(actorTypeHandlerAttribute.actorType, iActorTypeHandler);
 			}
 
 			foreach (Type type in types)
@@ -75,7 +75,7 @@ namespace ETHotfix
 				}
 
 				ActorMessageHandlerAttribute messageHandlerAttribute = (ActorMessageHandlerAttribute) attrs[0];
-				if (!messageHandlerAttribute.Type.Is(appType))
+				if (!messageHandlerAttribute.appType.Is(appType))
 				{
 					continue;
 				}
@@ -105,20 +105,20 @@ namespace ETHotfix
 				throw new Exception($"not found actortype handler: {actorType}");
 			}
 
-			await iActorTypeHandler.Handle(actorMessageInfo.Session, entity, actorMessageInfo.Message);
+			await iActorTypeHandler.Handle(actorMessageInfo.Session, entity, actorMessageInfo.Launch);
 		}
 
 		/// <summary>
 		/// 根据actor消息分发给ActorMessageHandler处理
 		/// </summary>
-		public static async Task Handle(this ActorMessageDispatherComponent self, Session session, Entity entity, IActorMessage actorRequest)
+		public static async Task Handle(this ActorMessageDispatherComponent self, Session session, Entity entity, IActorLanuch actorLaunch)
 		{
-			if (!self.ActorMessageHandlers.TryGetValue(actorRequest.GetType(), out IMActorHandler handler))
+			if (!self.ActorMessageHandlers.TryGetValue(actorLaunch.GetType(), out IMActorHandler handler))
 			{
-				throw new Exception($"not found message handler: {MongoHelper.ToJson(actorRequest)}");
+				throw new Exception($"not found message handler: {MongoHelper.ToJson(actorLaunch)}");
 			}
 
-			await handler.Handle(session, entity, actorRequest);
+			await handler.Handle(session, entity, actorLaunch);
 		}
 	}
 }

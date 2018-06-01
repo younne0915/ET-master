@@ -4,11 +4,11 @@ namespace ETModel
 {
 	public class ActorMessageHandlerAttribute : Attribute
 	{
-		public AppType Type { get; }
+		public AppType appType { get; }
 
 		public ActorMessageHandlerAttribute(AppType appType)
 		{
-			this.Type = appType;
+			this.appType = appType;
 		}
 	}
 }

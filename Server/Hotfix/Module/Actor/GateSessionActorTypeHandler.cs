@@ -10,18 +10,18 @@ namespace ETHotfix
 	[ActorTypeHandler(AppType.Gate, ActorType.GateSession)]
 	public class GateSessionActorTypeHandler : IActorTypeHandler
 	{
-		public async Task Handle(Session session, Entity entity, IActorMessage actorMessage)
+		public async Task Handle(Session session, Entity entity, IActorLanuch actorLaunch)
 		{
 			ActorResponse actorResponse = new ActorResponse
 			{
-				RpcId = actorMessage.RpcId
+				RpcId = actorLaunch.RpcId
 			};
 			try
 			{
 				// 发送给客户端
 				Session clientSession = entity as Session;
-				actorMessage.ActorId = 0;
-				clientSession.Send(actorMessage);
+				actorLaunch.ActorId = 0;
+				clientSession.Send(actorLaunch);
 
 				session.Reply(actorResponse);
 				await Task.CompletedTask;

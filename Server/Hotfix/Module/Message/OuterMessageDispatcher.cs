@@ -43,11 +43,11 @@ namespace ETHotfix
 					session.Reply(response);
 					return;
 				}
-				case IActorMessage iActorMessage: // gate session收到actor消息直接转发给actor自己去处理
+				case IActorNotify iActorNotify: // gate session收到actor消息直接转发给actor自己去处理
 				{
 					long unitId = session.GetComponent<SessionPlayerComponent>().Player.UnitId;
 					ActorMessageSender actorMessageSender = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(unitId);
-					actorMessageSender.Send(iActorMessage);
+					actorMessageSender.Send(iActorNotify);
 					return;
 				}
 			}

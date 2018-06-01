@@ -6,7 +6,7 @@ namespace ETModel
 	public struct ActorMessageInfo
 	{
 		public Session Session;
-		public IActorMessage Message;
+		public IActorLanuch Launch;
 	}
 
 	/// <summary>

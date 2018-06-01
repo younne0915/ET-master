@@ -6,7 +6,7 @@ namespace ETHotfix
 {
 	[Message(OuterOpcode.Actor_Test)]
 	[ProtoContract]
-	public partial class Actor_Test: IActorMessage
+	public partial class Actor_Test: IActorNotify
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
@@ -129,8 +129,8 @@ namespace ETHotfix
 
 	[Message(OuterOpcode.Actor_CreateUnits)]
 	[ProtoContract]
-	public partial class Actor_CreateUnits: IActorMessage
-	{
+	public partial class Actor_CreateUnits: IActorNotify
+    {
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
 

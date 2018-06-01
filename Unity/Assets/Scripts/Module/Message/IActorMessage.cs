@@ -3,13 +3,18 @@
 // 不要在这个文件加[ProtoInclude]跟[BsonKnowType]标签,加到InnerMessage.cs或者OuterMessage.cs里面去
 namespace ETModel
 {
-	public interface IActorMessage: IRequest
+	public interface IActorLanuch: IRequest
 	{
 		long ActorId { get; set; }
 	}
 
-	[ProtoContract]
-	public interface IActorRequest : IActorMessage
+    [ProtoContract]
+    public interface IActorNotify : IActorLanuch
+    {
+    }
+
+    [ProtoContract]
+	public interface IActorRequest : IActorLanuch
 	{
 	}
 
