@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using ETModel;
+using UnityEngine.UI;
 
 namespace Hotfix
 {
@@ -38,30 +39,32 @@ namespace Hotfix
 
 
     [ObjectSystem]
-    public class UIBattleComponentEvent : AwakeSystem<UIBattleComponent>
+    public class UIBattleComponentAwakeSystem : AwakeSystem<UIBattleComponent>
     {
         public override void Awake(UIBattleComponent self)
         {
-            throw new NotImplementedException();
+            
         }
     }
+
+
 
     public class UIBattleComponent : ETModel.Component
     {
         //private Transform bgTransform;
         //private Transform thumbTransform;
-        //private UISprite touchRegionSprite;
+        //private Image touchRegionImage;
         //private Vector3 orginJoystickPos;
         //private Transform joysticTransform;
 
         ///// <summary>
         ///// Button
         ///// </summary>
-        //private UIButton normalAttackBtn;
-        //private UIButton skill1Btn;
-        //private UIButton skill2Btn;
-        //private UIButton skill3Btn;
-        //private UIButton quitBtn;
+        //private GameObject normalAttackBtn;
+        //private GameObject skill1Btn;
+        //private GameObject skill2Btn;
+        //private GameObject skill3Btn;
+        //private GameObject quitBtn;
 
 
         //private GeometryTransformComponent geomComponent;
@@ -77,7 +80,7 @@ namespace Hotfix
         //    ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
         //    bgTransform = rc.Get<GameObject>("joysticBg").transform;
         //    thumbTransform = rc.Get<GameObject>("thumb").transform;
-        //    touchRegionSprite = rc.Get<GameObject>("touchRegion").GetComponent<UISprite>();
+        //    touchRegionImage = rc.Get<GameObject>("touchRegion").GetComponent<UISprite>();
         //    orginJoystickPos = bgTransform.localPosition;
         //    joysticTransform = rc.Get<GameObject>("JoystickObj").transform;
         //    geomComponent = Game.Scene.GetComponent<GeometryTransformComponent>();
@@ -98,7 +101,7 @@ namespace Hotfix
 
         //private void OnBtnClick()
         //{
-        //    if(UIButton.current == skill1Btn)
+        //    if (UIButton.current == skill1Btn)
         //    {
         //        OnSkill1BtnClick();
         //    }
@@ -174,17 +177,17 @@ namespace Hotfix
         //private bool CheckIfInTouchRegion(Vector2 touchPos)
         //{
         //    Vector3 touchNguiPos = geomComponent.ScreenPointToNGUIWorldPoint(touchPos);
-        //    Vector2 pivotOffset = touchRegionSprite.pivotOffset;
-        //    Vector3 pos = touchRegionSprite.transform.position;
-        //    Vector2 rect = new Vector2(touchRegionSprite.width, touchRegionSprite.height);
+        //    Vector2 pivotOffset = touchRegionImage.pivotOffset;
+        //    Vector3 pos = touchRegionImage.transform.position;
+        //    Vector2 rect = new Vector2(touchRegionImage.width, touchRegionImage.height);
 
         //    float minX = pos.x - pivotOffset.x;
         //    float maxX = pos.x + pivotOffset.x;
 
         //    float minY = pos.y - pivotOffset.y;
         //    float maxY = pos.y + pivotOffset.y;
-            
-        //    if(touchNguiPos.x > minX && touchNguiPos.x < maxX && touchNguiPos.y > minY && touchNguiPos.y < maxY)
+
+        //    if (touchNguiPos.x > minX && touchNguiPos.x < maxX && touchNguiPos.y > minY && touchNguiPos.y < maxY)
         //    {
         //        return true;
         //    }
