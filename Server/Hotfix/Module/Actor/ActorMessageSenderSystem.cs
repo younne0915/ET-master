@@ -41,9 +41,9 @@ namespace ETHotfix
 		{
 			if (self.ActorId == 0)
 			{
-				self.ActorId = await Game.Scene.GetComponent<LocationProxyComponent>().Get(self.Id);
-			}
-
+                self.ActorId = await Game.Scene.GetComponent<LocationProxyComponent>().Get(self.Id);
+            }
+            
 			self.Address = Game.Scene.GetComponent<StartConfigComponent>()
 					.Get(IdGenerater.GetAppIdFromId(self.ActorId))
 					.GetComponent<InnerConfig>().IPEndPoint;

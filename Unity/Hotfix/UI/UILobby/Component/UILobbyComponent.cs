@@ -77,12 +77,13 @@ namespace ETHotfix
 			Log.Info($"传送成功! {JsonHelper.ToJson(response)}");
 		}
 
-		private async void EnterMap()
+		private void EnterMap()
 		{
 			try
 			{
-				G2C_EnterMap g2CEnterMap = (G2C_EnterMap)await ETModel.SessionComponent.Instance.Session.Call(new C2G_EnterMap());
-				Game.Scene.GetComponent<UIComponent>().Remove(UIType.UILobby);
+                //G2C_EnterMap g2CEnterMap = (G2C_EnterMap)await ETModel.SessionComponent.Instance.Session.Call(new C2G_EnterMap());
+                Game.Scene.GetComponent<UIComponent>().Create(UIType.UIBattle);
+                Game.Scene.GetComponent<UIComponent>().Remove(UIType.UILobby);
 			}
 			catch (Exception e)
 			{
