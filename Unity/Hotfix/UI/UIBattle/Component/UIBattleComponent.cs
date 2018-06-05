@@ -84,7 +84,7 @@ namespace ETHotfix
             bgTransform = rc.Get<GameObject>("joysticBg").GetComponent<RectTransform>();
             thumbTransform = rc.Get<GameObject>("thumb").transform;
             touchRegionImage = rc.Get<GameObject>("touchRegion").GetComponent<Image>();
-            orginJoystickPos = bgTransform.localPosition;
+            orginJoystickPos = thumbTransform.localPosition;
             joysticTransform = rc.Get<GameObject>("JoystickObj").transform;
             geomComponent = ETModel.Game.Scene.GetComponent<GeometryTransformComponent>();
 
@@ -101,6 +101,8 @@ namespace ETHotfix
             Game.Scene.GetComponent<GameEventComponent>().AddListener<TouchStartEvent>(TouchStart);
             Game.Scene.GetComponent<GameEventComponent>().AddListener<TouchOffsetEvent>(TouchOffset);
             Game.Scene.GetComponent<GameEventComponent>().AddListener<TouchEndEvent>(TouchEnded);
+
+            Debug.Log("orginJoystickPos = " + orginJoystickPos);
 
         }
 
@@ -153,6 +155,7 @@ namespace ETHotfix
             _touchStart = true;
             bgTransform.localPosition = geomComponent.ScreenPointToUGUILocalPoint(touchPos, joysticTransform);
             thumbTransform.localPosition = geomComponent.ScreenPointToUGUILocalPoint(touchPos, joysticTransform);
+            Debug.Log("bgTransform.localPosition = " + bgTransform.localPosition);
         }
 
         public void TouchOffset(TouchOffsetEvent ev)
@@ -182,7 +185,7 @@ namespace ETHotfix
 
             if (Mathf.Abs(angle - _lastAngle) > 0.5f)
             {
-                Log.Debug("send command");
+                //Log.Debug("send command");
             }
             _lastAngle = angle;
         }
