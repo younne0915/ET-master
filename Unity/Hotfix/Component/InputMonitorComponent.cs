@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using ETModel;
 
-
-namespace ETModel
+namespace ETHotfix
 {
     [ObjectSystem]
     public class InputMonitorComponentUpdateSystem : UpdateSystem<InputMonitorComponent>

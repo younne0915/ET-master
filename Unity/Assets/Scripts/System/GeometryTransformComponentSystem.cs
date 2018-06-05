@@ -12,9 +12,11 @@ namespace ETModel
     {
         public static Vector3 ScreenPointToUGUIWorldPoint(this GeometryTransformComponent self, Vector2 touchPos)
         {
-            Vector3 screenPos = new Vector3(touchPos.x, touchPos.y, 0);
+            //Vector3 screenPos = new Vector3(touchPos.x, touchPos.y, 0);
             if (self.uiCamera != null)
             {
+                //uguiZ ：Canvas相对于Camera的距离
+                Vector3 screenPos = new Vector3(touchPos.x, touchPos.y, self.uguiZ);
                 return self.uiCamera.ScreenToWorldPoint(screenPos);
             }
             Log.Error("uiCamera == null");
@@ -23,12 +25,13 @@ namespace ETModel
 
         public static Vector3 ScreenPointToUGUILocalPoint(this GeometryTransformComponent self, Vector2 touchPos, Transform parentTrans)
         {
-            Vector3 screenPos = new Vector3(touchPos.x, touchPos.y, 0);
             if (self.uiCamera != null)
             {
+                Vector3 screenPos = new Vector3(touchPos.x, touchPos.y, self.uguiZ);
                 Vector3 worldVec3 = self.uiCamera.ScreenToWorldPoint(screenPos);
                 return parentTrans.InverseTransformPoint(worldVec3);
             }
+
             Log.Error("uiCamera == null");
             return Vector3.zero;
         }

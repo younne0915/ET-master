@@ -343,6 +343,8 @@
     <Compile Include="Assets\Scripts\Component\Config\OuterConfig.cs" />
     <Compile Include="Assets\Scripts\Component\Config\RunServerConfig.cs" />
     <Compile Include="Assets\Scripts\Component\Config\StartConfig.cs" />
+    <Compile Include="Assets\Scripts\Component\GameEventComponent.cs" />
+    <Compile Include="Assets\Scripts\Component\GameEvents.cs" />
     <Compile Include="Assets\Scripts\Component\GeometryTransformComponent.cs" />
     <Compile Include="Assets\Scripts\Component\GlobalConfigComponent.cs" />
     <Compile Include="Assets\Scripts\Component\InputMonitorComponent.cs" />
@@ -503,6 +505,7 @@
     <Compile Include="Assets\T4M\Scripts\T4MPlantObjSC.cs" />
     <Compile Include="Assets\T4M\Tutorial\Scripts\FlyCam.cs" />
     <Compile Include="Assets\T4M\Tutorial\Scripts\WaypointCam.cs" />
+    <Compile Include="Assets\Test\TestPositionTranslate.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\CLRBindings.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ActionHelper_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Actor_CreateUnits_Binding.cs" />

@@ -19,9 +19,12 @@ namespace ETHotfix
 				Game.Scene.AddComponent<UIComponent>();
 				Game.Scene.AddComponent<OpcodeTypeComponent>();
 				Game.Scene.AddComponent<MessageDispatherComponent>();
+                Game.Scene.AddComponent<InputMonitorComponent>();
+                Game.Scene.AddComponent<GameEventComponent>();
 
-				// 加载热更配置
-				ETModel.Game.Scene.GetComponent<ResourcesComponent>().LoadBundle("config.unity3d");
+
+                // 加载热更配置
+                ETModel.Game.Scene.GetComponent<ResourcesComponent>().LoadBundle("config.unity3d");
 				Game.Scene.AddComponent<ConfigComponent>();
 				ETModel.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle("config.unity3d");
 

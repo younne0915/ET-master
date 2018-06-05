@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ETModel
 {
@@ -25,6 +26,12 @@ namespace ETModel
             private set;
         }
 
+        private float _uguiZ;
+        public float uguiZ
+        {
+            get { return _uguiZ; }
+        }
+
         public void Awake()
         {
             GameObject obj = GameObject.Find("UICamera");
@@ -32,6 +39,14 @@ namespace ETModel
             {
                 uiCamera = obj.GetComponent<Camera>();
             }
+
+            obj = GameObject.Find("LoginCanvas");
+            if(obj != null)
+            {
+                Canvas loginCanvas = obj.GetComponent<Canvas>();
+                _uguiZ = loginCanvas.planeDistance;
+            }
+
         }
     }
 }

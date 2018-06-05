@@ -30,9 +30,11 @@ namespace ETModel
 				Game.Scene.AddComponent<UnitComponent>();
 				Game.Scene.AddComponent<ClientFrameComponent>();
 				Game.Scene.AddComponent<UIComponent>();
+                Game.Scene.AddComponent<GeometryTransformComponent>();
 
-				// 下载ab包
-				await BundleHelper.DownloadBundle();
+
+                // 下载ab包
+                await BundleHelper.DownloadBundle();
 
 				Game.Hotfix.LoadHotfixAssembly();
 
