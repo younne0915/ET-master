@@ -35,11 +35,11 @@ namespace ETHotfix
 
 
     [ObjectSystem]
-    public class UIBattleComponentAwakeSystem : AwakeSystem<UIBattleComponent>
+    public class UIBattleComponentStartSystem : StartSystem<UIBattleComponent>
     {
-        public override void Awake(UIBattleComponent self)
+        public override void Start(UIBattleComponent self)
         {
-            self.Awake();
+            self.Start();
         }
     }
 
@@ -55,7 +55,7 @@ namespace ETHotfix
 
     public class UIBattleComponent : Component
     {
-        private RectTransform bgTransform;
+        private RectTransform bgRectTransform;
         private Transform thumbTransform;
         private Image touchRegionImage;
         private Vector3 orginJoystickPos;
@@ -78,16 +78,16 @@ namespace ETHotfix
 
         private bool _touchStart = false;
 
-        public void Awake()
+        public void Start()
         {
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
-            bgTransform = rc.Get<GameObject>("joysticBg").GetComponent<RectTransform>();
+            bgRectTransform = rc.Get<GameObject>("joysticBg").GetComponent<RectTransform>();
+            orginJoystickPos = bgRectTransform.localPosition;
             thumbTransform = rc.Get<GameObject>("thumb").transform;
             touchRegionImage = rc.Get<GameObject>("touchRegion").GetComponent<Image>();
-            orginJoystickPos = thumbTransform.localPosition;
             joysticTransform = rc.Get<GameObject>("JoystickObj").transform;
-            geomComponent = ETModel.Game.Scene.GetComponent<GeometryTransformComponent>();
 
+            geomComponent = ETModel.Game.Scene.GetComponent<GeometryTransformComponent>();
 
             skill1Btn = rc.Get<GameObject>("skill1");
             skill1Btn.GetComponent<Button>().onClick.Add(OnSkill1BtnClick);
@@ -97,12 +97,10 @@ namespace ETHotfix
             skill3Btn.GetComponent<Button>().onClick.Add(OnSkill3BtnClick);
             normalAttackBtn = rc.Get<GameObject>("normalAttack");
             normalAttackBtn.GetComponent<Button>().onClick.Add(OnNormalAttackBtnClick);
-
             Game.Scene.GetComponent<GameEventComponent>().AddListener<TouchStartEvent>(TouchStart);
             Game.Scene.GetComponent<GameEventComponent>().AddListener<TouchOffsetEvent>(TouchOffset);
             Game.Scene.GetComponent<GameEventComponent>().AddListener<TouchEndEvent>(TouchEnded);
 
-            Debug.Log("orginJoystickPos = " + orginJoystickPos);
 
         }
 
@@ -130,9 +128,9 @@ namespace ETHotfix
 
         private bool CheckIfInTouchRegion(Vector2 touchPos)
         {
-            Vector3 touchNguiPos = geomComponent.ScreenPointToUGUIWorldPoint(touchPos);
+            Vector3 touchUguiLocalPos = geomComponent.ScreenPointToUGUILocalPoint(touchPos, joysticTransform);
             Vector2 pivotOffset = touchRegionImage.rectTransform.pivot;
-            Vector3 pos = touchRegionImage.transform.position;
+            Vector3 pos = touchRegionImage.transform.localPosition;
             Vector2 rect = new Vector2(touchRegionImage.rectTransform.rect.width, touchRegionImage.rectTransform.rect.height);
 
             float minX = pos.x - rect.x * pivotOffset.x;
@@ -140,8 +138,11 @@ namespace ETHotfix
 
             float minY = pos.y - rect.y * pivotOffset.y;
             float maxY = pos.y + rect.y * pivotOffset.y;
+            Log.Debug("pos = " + pos);
+            Log.Debug("minX = " + minX + ", maxX = " + maxX + ", minY = " + minY + ", maxY = " + maxY);
+            Log.Debug("touchUguiPos = " + touchUguiLocalPos);
 
-            if (touchNguiPos.x > minX && touchNguiPos.x < maxX && touchNguiPos.y > minY && touchNguiPos.y < maxY)
+            if (touchUguiLocalPos.x > minX && touchUguiLocalPos.x < maxX && touchUguiLocalPos.y > minY && touchUguiLocalPos.y < maxY)
             {
                 return true;
             }
@@ -153,9 +154,8 @@ namespace ETHotfix
             Vector2 touchPos = ev.touchPos;
             if (!CheckIfInTouchRegion(touchPos)) return;
             _touchStart = true;
-            bgTransform.localPosition = geomComponent.ScreenPointToUGUILocalPoint(touchPos, joysticTransform);
+            bgRectTransform.localPosition = geomComponent.ScreenPointToUGUILocalPoint(touchPos, joysticTransform);
             thumbTransform.localPosition = geomComponent.ScreenPointToUGUILocalPoint(touchPos, joysticTransform);
-            Debug.Log("bgTransform.localPosition = " + bgTransform.localPosition);
         }
 
         public void TouchOffset(TouchOffsetEvent ev)
@@ -165,12 +165,12 @@ namespace ETHotfix
             if (!_touchStart) return;
 
             Vector3 touchUguiPos = geomComponent.ScreenPointToUGUILocalPoint(touchPos, joysticTransform);
-            Vector3 directRealVec3 = touchUguiPos - bgTransform.localPosition;
-            float radus = bgTransform.rect.width / 2;
-            if (directRealVec3.magnitude >= radus)
+            Vector3 directRealVec3 = touchUguiPos - bgRectTransform.localPosition;
+            float radius = bgRectTransform.rect.width / 2;
+            if (directRealVec3.magnitude >= radius)
             {
-                Vector3 directInsideCicleVec3 = directRealVec3.normalized * radus;
-                Vector3 edgeCirclePos = bgTransform.localPosition + directInsideCicleVec3;
+                Vector3 directInsideCicleVec3 = directRealVec3.normalized * radius;
+                Vector3 edgeCirclePos = bgRectTransform.localPosition + directInsideCicleVec3;
                 thumbTransform.localPosition = edgeCirclePos;
 
             }
@@ -195,7 +195,7 @@ namespace ETHotfix
             Vector2 touchPos = ev.touchPos;
             if (!_touchStart) return;
             _touchStart = false;
-            bgTransform.localPosition = orginJoystickPos;
+            bgRectTransform.localPosition = orginJoystickPos;
             thumbTransform.localPosition = orginJoystickPos;
 
         }
