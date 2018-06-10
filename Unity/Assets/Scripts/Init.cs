@@ -31,7 +31,7 @@ namespace ETModel
 				Game.Scene.AddComponent<ClientFrameComponent>();
 				Game.Scene.AddComponent<UIComponent>();
                 Game.Scene.AddComponent<GeometryTransformComponent>();
-
+                Game.Scene.AddComponent<SceneChangeComponent>();
 
                 // 下载ab包
                 await BundleHelper.DownloadBundle();

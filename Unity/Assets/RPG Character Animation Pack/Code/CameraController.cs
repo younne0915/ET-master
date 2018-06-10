@@ -48,11 +48,11 @@ public class CameraController : MonoBehaviour
 		if(following)
 		{
 			offset = Quaternion.AngleAxis(rotate * rotateSpeed, Vector3.up) * offset;
-			transform.position = cameraTarget.transform.position + offset; 
-			transform.position = new Vector3(Mathf.Lerp(lastPosition.x, cameraTarget.transform.position.x + offset.x, smoothing * Time.deltaTime), 
-				Mathf.Lerp(lastPosition.y, cameraTarget.transform.position.y + offset.y, smoothing * Time.deltaTime), 
-				Mathf.Lerp(lastPosition.z, cameraTarget.transform.position.z + offset.z, smoothing * Time.deltaTime));
-		} 
+            transform.position = cameraTarget.transform.position + offset;
+            transform.position = new Vector3(Mathf.Lerp(lastPosition.x, cameraTarget.transform.position.x + offset.x, smoothing * Time.deltaTime),
+                Mathf.Lerp(lastPosition.y, cameraTarget.transform.position.y + offset.y, smoothing * Time.deltaTime),
+                Mathf.Lerp(lastPosition.z, cameraTarget.transform.position.z + offset.z, smoothing * Time.deltaTime));
+        } 
 		else
 		{
 			transform.position = lastPosition; 
