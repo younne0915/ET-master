@@ -7,7 +7,7 @@ namespace ETModel
 	{
 		public static string GetText(string key)
 		{
-			string path = $"../Config/{key}.txt";
+			string path = $"./Config/{key}.txt";
 			try
 			{
 				string configStr = File.ReadAllText(path);
