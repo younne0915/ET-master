@@ -59,9 +59,12 @@ public class ExcelExporterEditor : EditorWindow
     private const string _serverExcelPath = @"..\Excel\Server";
 
     private const string _clientExportPath = @"..\Config\Client";
-    private const string _clientCopyPath = @".\Assets\Res\Config";
     private const string _publicExportPath = @"..\Config\Public";
     private const string _serverExportPath = @"..\Config\Server";
+
+    private const string _clientCopyPath = @".\Assets\Res\Config\";
+    private const string _serverCopyPath = @"..\Server\Config\";
+
 
     private const string _clientClassPath = @".\Assets\Scripts\Entity\Config";
     private const string _serverClassPath = @"..\Server\Model\\Entity\Config";
@@ -128,7 +131,9 @@ public class ExcelExporterEditor : EditorWindow
             }
             else if(filePath.Contains(_publicExcelPartPath))
             {
+                _excelType = ExcelType.Client;
                 ExportClass(filePath, _clientClassPath);
+                _excelType = ExcelType.Server;
                 ExportClass(filePath, _serverClassPath);
 
             }
@@ -156,8 +161,9 @@ public class ExcelExporterEditor : EditorWindow
 			ISheet sheet = xssfWorkbook.GetSheetAt(0);
 			sb.Append("namespace ETModel\n{\n");
 
-			sb.Append("\t[Config(AppType.Client)]\n");
-			sb.Append($"\tpublic partial class {protoName}Category : ACategory<{protoName}>\n");
+            sb.Append("\t[Config(AppType.Client)]\n");
+
+            sb.Append($"\tpublic partial class {protoName}Category : ACategory<{protoName}>\n");
 			sb.Append("\t{\n");
 			sb.Append("\t}\n\n");
 
@@ -276,7 +282,26 @@ public class ExcelExporterEditor : EditorWindow
 
             if (_excelType == ExcelType.Client)
             {
-                File.Copy(exportDir, _clientCopyPath);
+                string protoName = Path.GetFileNameWithoutExtension(fileName);
+                string sourcePath = Path.Combine(exportDir, $"{protoName}.txt");
+                string destPath = Path.Combine(_clientCopyPath, $"{protoName}.txt");
+                if (File.Exists(destPath))
+                {
+                    File.Delete(destPath);
+                }
+                File.Copy(sourcePath, destPath);
+            }
+
+            else if (_excelType == ExcelType.Server)
+            {
+                string protoName = Path.GetFileNameWithoutExtension(fileName);
+                string sourcePath = Path.Combine(exportDir, $"{protoName}.txt");
+                string destPath = Path.Combine(_serverCopyPath, $"{protoName}.txt");
+                if (File.Exists(destPath))
+                {
+                    File.Delete(destPath);
+                }
+                File.Copy(sourcePath, destPath);
             }
         }
 
