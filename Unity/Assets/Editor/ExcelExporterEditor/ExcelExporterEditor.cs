@@ -16,6 +16,14 @@ public struct CellInfo
 	public string Desc;
 }
 
+public enum ExcelType
+{
+    Client,
+    Public,
+    Server,
+    Default,
+}
+
 public class ExcelMD5Info
 {
 	public Dictionary<string, string> fileMD5 = new Dictionary<string, string>();
@@ -42,43 +50,49 @@ public class ExcelExporterEditor : EditorWindow
 	}
 
 	private const string ExcelPath = @"..\Excel";
+    private const string _clientExcelPartPath = @"\Excel\Client";
+    private const string _publicExcelPartPath = @"\Excel\Public";
+    private const string _serverExcelPartPath = @"\Excel\Server";
 
-	private bool isClient;
+    private const string _clientExcelPath = @"..\Excel\Client";
+    private const string _publicExcelPath = @"..\Excel\Public";
+    private const string _serverExcelPath = @"..\Excel\Server";
 
-	private ExcelMD5Info md5Info;
-	
-	// Update is called once per frame
-	private void OnGUI()
+    private const string _clientExportPath = @"..\Config\Client";
+    private const string _clientCopyPath = @".\Assets\Res\Config";
+    private const string _publicExportPath = @"..\Config\Public";
+    private const string _serverExportPath = @"..\Config\Server";
+
+    private const string _clientClassPath = @".\Assets\Scripts\Entity\Config";
+    private const string _serverClassPath = @"..\Server\Model\\Entity\Config";
+
+    private ExcelMD5Info md5Info;
+
+    private ExcelType _excelType = ExcelType.Default;
+
+    // Update is called once per frame
+    private void OnGUI()
 	{
 		try
 		{
-			const string clientPath = @".\Assets\Res\Config";
 
-			string serverPath = EditorPrefs.GetString("serverPath");
-			serverPath = EditorGUILayout.TextField("服务端配置路径:", serverPath);
-			EditorPrefs.SetString("serverPath", serverPath);
-
-			if (GUILayout.Button("导出客户端配置"))
+            if (GUILayout.Button("导出客户端配置"))
 			{
-				this.isClient = true;
-				ExportAll(clientPath);
+                _excelType = ExcelType.Client;
+				ExportAll();
 			}
 
 			if (GUILayout.Button("导出服务端配置"))
 			{
-				this.isClient = false;
-				if (serverPath == "")
-				{
-					Log.Error("请输入服务端配置路径!");
-					return;
-				}
-				ExportAll(serverPath);
+                _excelType = ExcelType.Server;
+                ExportAll();
 			}
 
 			if (GUILayout.Button("生成配置类"))
 			{
-				ExportAllClass(@".\Assets\Scripts\Entity\Config");
-			}
+                //ExportAllClass(@".\Assets\Scripts\Entity\Config");
+                ExportAllClass();
+            }
 		}
 		catch (Exception e)
 		{
@@ -86,9 +100,11 @@ public class ExcelExporterEditor : EditorWindow
 		}
 	}
 
-	private void ExportAllClass(string exportDir)
+	private void ExportAllClass()
 	{
-		foreach (string filePath in Directory.GetFiles(ExcelPath))
+        string[] tempArr = Directory.GetFiles(ExcelPath, "*.xlsx", SearchOption.AllDirectories);
+
+        foreach (string filePath in tempArr)
 		{
 			if (Path.GetExtension(filePath) != ".xlsx")
 			{
@@ -99,8 +115,25 @@ public class ExcelExporterEditor : EditorWindow
 				continue;
 			}
 
-			ExportClass(filePath, exportDir);
-		}
+
+            if (filePath.Contains(_clientExcelPartPath))
+            {
+                ExportClass(filePath, _clientClassPath);
+
+            }
+            else if (filePath.Contains(_serverExcelPartPath))
+            {
+                ExportClass(filePath, _serverClassPath);
+
+            }
+            else if(filePath.Contains(_publicExcelPartPath))
+            {
+                ExportClass(filePath, _clientClassPath);
+                ExportClass(filePath, _serverClassPath);
+
+            }
+
+        }
 		Log.Debug("生成类完成!");
 		AssetDatabase.Refresh();
 	}
@@ -144,7 +177,7 @@ public class ExcelExporterEditor : EditorWindow
 				}
 
 				// s开头表示这个字段是服务端专用
-				if (fieldDesc.StartsWith("s") && this.isClient)
+				if (fieldDesc.StartsWith("s") && _excelType == ExcelType.Client)
 				{
 					continue;
 				}
@@ -173,7 +206,7 @@ public class ExcelExporterEditor : EditorWindow
 	}
 
 
-	private void ExportAll(string exportDir)
+	private void ExportAll()
 	{
 		string md5File = Path.Combine(ExcelPath, "md5.txt");
 		if (!File.Exists(md5File))
@@ -185,7 +218,10 @@ public class ExcelExporterEditor : EditorWindow
 			this.md5Info = MongoHelper.FromJson<ExcelMD5Info>(File.ReadAllText(md5File));
 		}
 
-		foreach (string filePath in Directory.GetFiles(ExcelPath))
+        string[] tempArr = Directory.GetFiles(ExcelPath, "*.xlsx", SearchOption.AllDirectories);
+        
+
+        foreach (string filePath in tempArr)
 		{
 			if (Path.GetExtension(filePath) != ".xlsx")
 			{
@@ -195,17 +231,54 @@ public class ExcelExporterEditor : EditorWindow
 			{
 				continue;
 			}
-			string fileName = Path.GetFileName(filePath);
-			string oldMD5 = this.md5Info.Get(fileName);
-			string md5 = MD5Helper.FileMD5(filePath);
-			this.md5Info.Add(fileName, md5);
-			if (md5 == oldMD5)
-			{
-				continue;
-			}
 
-			Export(filePath, exportDir);
-		}
+            string eliminatePath = "";
+            string exportDir = "";
+            switch (_excelType)
+            {
+                case ExcelType.Client:
+                    if (filePath.Contains(_publicExcelPartPath))
+                    {
+                        exportDir = _publicExportPath;
+                    }
+                    else
+                    {
+                        exportDir = _clientExportPath;
+                    }
+                    eliminatePath = _serverExcelPartPath;
+                    break;
+                case ExcelType.Public:
+                    break;
+                case ExcelType.Server:
+                    if (filePath.Contains(_publicExcelPartPath))
+                    {
+                        exportDir = _publicExportPath;
+                    }
+                    else
+                    {
+                        exportDir = _serverExportPath;
+                    }
+                    eliminatePath = _clientExcelPartPath;
+                    break;
+            }
+            if (filePath.Contains(eliminatePath)) continue;
+
+            string fileName = Path.GetFileName(filePath);
+            string oldMD5 = this.md5Info.Get(fileName);
+            string md5 = MD5Helper.FileMD5(filePath);
+            this.md5Info.Add(fileName, md5);
+            if (md5 == oldMD5)
+            {
+                continue;
+            }
+
+            Export(filePath, exportDir);
+
+            if (_excelType == ExcelType.Client)
+            {
+                File.Copy(exportDir, _clientCopyPath);
+            }
+        }
 
 		File.WriteAllText(md5File, this.md5Info.ToJson());
 
@@ -267,13 +340,13 @@ public class ExcelExporterEditor : EditorWindow
 				}
 
 				// s开头表示这个字段是服务端专用
-				if (desc.StartsWith("s") && this.isClient)
+				if (desc.StartsWith("s") && _excelType == ExcelType.Client)
 				{
 					continue;
 				}
 
 				// c开头表示这个字段是客户端专用
-				if (desc.StartsWith("c") && !this.isClient)
+				if (desc.StartsWith("c") && _excelType == ExcelType.Server)
 				{
 					continue;
 				}
@@ -293,7 +366,7 @@ public class ExcelExporterEditor : EditorWindow
 
 				if (fieldName == "Id" || fieldName == "_id")
 				{
-					if (this.isClient)
+					if (_excelType == ExcelType.Client)
 					{
 						fieldName = "Id";
 					}

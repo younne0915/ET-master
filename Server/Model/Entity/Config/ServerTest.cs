@@ -1,15 +1,15 @@
 namespace ETModel
 {
 	[Config(AppType.Client)]
-	public partial class HerdsmanDetailCategory : ACategory<HerdsmanDetail>
+	public partial class ServerTestCategory : ACategory<ServerTest>
 	{
 	}
 
-	public class HerdsmanDetail: IConfig
+	public class ServerTest: IConfig
 	{
 		public long Id { get; set; }
 		public string Name;
-		public int Sex;
+		public string Desc;
 		public int Position;
 		public int Height;
 		public int Weight;

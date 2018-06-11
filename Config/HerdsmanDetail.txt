@@ -1,1 +1,0 @@
-{"_id":1,"Name":"米克尔","Sex":0,"Position":1,"Height":178,"Weight":68}
