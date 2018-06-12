@@ -125,6 +125,8 @@ namespace ETHotfix
 		[ProtoMember(3, IsRequired = true)]
 		public int Z;
 
+        [ProtoMember(4, IsRequired = true)]
+        public int heroID;
 	}
 
 	[Message(OuterOpcode.Actor_CreateUnits)]
