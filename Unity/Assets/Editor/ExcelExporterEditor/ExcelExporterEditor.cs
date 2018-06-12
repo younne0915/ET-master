@@ -271,6 +271,7 @@ public class ExcelExporterEditor : EditorWindow
 
             string fileName = Path.GetFileName(filePath);
             string oldMD5 = this.md5Info.Get(fileName);
+            fileName = _excelType + "-" + fileName;
             string md5 = MD5Helper.FileMD5(filePath);
             this.md5Info.Add(fileName, md5);
             if (md5 == oldMD5)
