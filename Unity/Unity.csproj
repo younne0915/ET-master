@@ -363,6 +363,7 @@
     <Compile Include="Assets\Scripts\Component\InputMonitorComponent.cs" />
     <Compile Include="Assets\Scripts\Component\SceneChangeComponent.cs" />
     <Compile Include="Assets\Scripts\Component\TimerComponent.cs" />
+    <Compile Include="Assets\Scripts\Entity\Config\Hero.cs" />
     <Compile Include="Assets\Scripts\Entity\Config\PublicTest.cs" />
     <Compile Include="Assets\Scripts\Entity\Config\UnitConfig.cs" />
     <Compile Include="Assets\Scripts\Entity\Game.cs" />

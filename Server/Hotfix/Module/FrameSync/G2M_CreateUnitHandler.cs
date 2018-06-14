@@ -27,7 +27,7 @@ namespace ETHotfix
 					Unit[] units = Game.Scene.GetComponent<UnitComponent>().GetAll();
 					foreach (Unit u in units)
 					{
-						actorCreateUnits.Units.Add(new UnitInfo() {UnitId = u.Id, X = (int)(u.Position.X * 1000), Z = (int)(u.Position.Z * 1000) });
+						actorCreateUnits.Units.Add(new UnitInfo() {UnitId = u.Id, X = (int)(u.Position.X * 1000), Z = (int)(u.Position.Z * 1000), heroID = 1 });
 					}
 					MessageHelper.Broadcast(actorCreateUnits);
 				}
