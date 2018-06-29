@@ -212,12 +212,6 @@
     <Reference Include="UnityEngine.WindModule">
       <HintPath>D:/Unity/Util/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Unity/Util/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Unity/Util/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>D:/Unity/Util/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
     </Reference>
@@ -268,6 +262,12 @@
     </Reference>
     <Reference Include="UnityEditor.VR">
       <HintPath>D:/Unity/Util/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>D:/Unity/Util/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>D:/Unity/Util/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>D:/Unity/Util/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -394,6 +394,7 @@
     <None Include="Assets\RPG Character Animation Pack\Elements\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
     <None Include="Assets\RPG Character Animation Pack\Elements\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
     <None Include="Assets\RPG Character Animation Pack\Elements\ImageEffects\Shaders\frag_ao.cginc" />
+    <None Include="Assets\Res\Config\GlobalProto.txt" />
     <None Include="Assets\Res\Config\Hero.txt" />
     <None Include="Assets\Res\Config\PublicTest.txt" />
     <None Include="Assets\Res\Config\UnitConfig.txt" />

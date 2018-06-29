@@ -54,3 +54,7 @@ MonoBehaviour:
   data:
   - key: Hero
     gameObject: {fileID: 4900000, guid: 4612a18de4f2f544cad36b1ff2ec815c, type: 3}
+  - key: PublicTest
+    gameObject: {fileID: 4900000, guid: bd2b23ad94b21d8478ddd064de156f26, type: 3}
+  - key: UnitConfig
+    gameObject: {fileID: 4900000, guid: c245c7dda13b3ad43b2278925e922899, type: 3}
