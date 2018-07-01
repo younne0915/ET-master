@@ -25,11 +25,13 @@ namespace ETHotfix
 				{
 					Actor_CreateUnits actorCreateUnits = new Actor_CreateUnits();
 					Unit[] units = Game.Scene.GetComponent<UnitComponent>().GetAll();
-					foreach (Unit u in units)
-					{
-						actorCreateUnits.Units.Add(new UnitInfo() {UnitId = u.Id, X = (int)(u.Position.X * 1000), Z = (int)(u.Position.Z * 1000), heroID = 1 });
-					}
-					MessageHelper.Broadcast(actorCreateUnits);
+                    Unit u;
+                    for (int i = 0; i < units.Length; i++)
+                    {
+                        u = units[i];
+                        actorCreateUnits.Units.Add(new UnitInfo(u.Id, (int)(u.Position.X * 1000), (int)(u.Position.Z * 1000), i + 1));
+                    }
+                    MessageHelper.Broadcast(actorCreateUnits);
 				}
 			}
 			catch (Exception e)

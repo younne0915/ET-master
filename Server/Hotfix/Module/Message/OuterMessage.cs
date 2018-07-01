@@ -127,7 +127,20 @@ namespace ETHotfix
 
         [ProtoMember(4, IsRequired = true)]
         public int heroID;
-	}
+
+        public UnitInfo()
+        {
+
+        }
+
+        public UnitInfo(long uID, int x, int z, int hID)
+        {
+            this.UnitId = uID;
+            this.X = x;
+            this.Z = z;
+            this.heroID = hID;
+        }
+    }
 
 	[Message(OuterOpcode.Actor_CreateUnits)]
 	[ProtoContract]

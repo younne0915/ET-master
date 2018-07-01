@@ -16,5 +16,6 @@ namespace ETModel
 		public float AttackDis;
 		public float Attack;
 		public float Deffense;
+		public string ModelName;
 	}
 }
