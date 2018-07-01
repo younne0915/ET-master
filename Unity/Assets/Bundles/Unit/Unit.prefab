@@ -52,19 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - key: 539276131
-    gameObject: {fileID: 4900000, guid: 4612a18de4f2f544cad36b1ff2ec815c, type: 3}
-  - key: -1327266629
-    gameObject: {fileID: 4900000, guid: bd2b23ad94b21d8478ddd064de156f26, type: 3}
-  - key: -2006462162
-    gameObject: {fileID: 4900000, guid: c245c7dda13b3ad43b2278925e922899, type: 3}
-  - key: -1595135141
-    gameObject: {fileID: 0}
-  - key: -788535615
-    gameObject: {fileID: 0}
-  - key: -36001003
-    gameObject: {fileID: 0}
-  - key: -332800356
-    gameObject: {fileID: 0}
-  - key: -1482028332
-    gameObject: {fileID: 0}
+  - key: Herdsman
+    gameObject: {fileID: 100004, guid: 56ede2b024451044890bbfbf05bf78d9, type: 2}
