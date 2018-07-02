@@ -1,2 +1,2 @@
-{"_id":1,"Name":"牧羊人","Sex":1,"HP":1000,"MP":500,"ViewDis":20,"AttackDis":8,"Attack":20,"Deffense":5}
-{"_id":2,"Name":"阿狸","Sex":0,"HP":980,"MP":490,"ViewDis":20,"AttackDis":12,"Attack":23,"Deffense":6}
+{"Id":1,"Name":"牧羊人","Sex":1,"HP":1000,"MP":500,"ViewDis":20,"AttackDis":8,"Attack":20,"Deffense":5,"ModelName":"Herdsman"}
+{"Id":2,"Name":"阿狸","Sex":0,"HP":980,"MP":490,"ViewDis":20,"AttackDis":12,"Attack":23,"Deffense":6,"ModelName":"Herdswomen"}
