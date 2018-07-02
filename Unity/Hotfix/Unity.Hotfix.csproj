@@ -72,7 +72,6 @@
     <Compile Include="Component\GameEvents.cs" />
     <Compile Include="Component\InputMonitorComponent.cs" />
     <Compile Include="Module\FrameSync\OperaComponent.cs" />
-    <Compile Include="Entity\Config\UnitConfig.cs" />
     <Compile Include="Module\FrameSync\TestHotfixSubscribMonoEvent_LogString.cs" />
     <Compile Include="Module\FrameSync\Actor_CreateUnitsHandler.cs" />
     <Compile Include="Module\FrameSync\Actor_TestHandler.cs" />
@@ -134,6 +133,9 @@
       <Project>{d1fdb199-0fb7-099d-3771-c6a942e4e326}</Project>
       <Name>Unity.Plugins</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\Config\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

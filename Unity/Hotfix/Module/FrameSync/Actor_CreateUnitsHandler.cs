@@ -22,7 +22,9 @@ namespace ETHotfix
 				}
 				Unit unit = UnitFactory.Create(unitInfo.UnitId);
 				unit.Position = new Vector3(unitInfo.X / 1000f, 0, unitInfo.Z / 1000f);
-				unit.IntPos = new VInt3(unitInfo.X, 0, unitInfo.Z);
+                unit.hero = (Hero)Game.Scene.GetComponent<ConfigComponent>().Get(typeof(Hero), 1);
+                Log.Debug($"config {JsonHelper.ToJson(unit.hero)}");
+                unit.IntPos = new VInt3(unitInfo.X, 0, unitInfo.Z);
 
 				if (PlayerComponent.Instance.MyPlayer.UnitId == unit.Id)
 				{
