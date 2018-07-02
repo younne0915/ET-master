@@ -13,6 +13,8 @@ namespace ETModel
 		public VInt3 IntPos;
 
 		public GameObject GameObject;
+
+        public Hero hero;
 		
 		public void Awake()
 		{

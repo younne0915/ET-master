@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 13681452}
   - component: {fileID: 19591626}
   m_Layer: 0
-  m_Name: Herdsman
+  m_Name: Herdswomen
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
